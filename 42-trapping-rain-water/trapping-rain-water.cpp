@@ -1,23 +1,25 @@
-
 class Solution {
 public:
     int trap(vector<int>& arr) {
-        int ans = 0;
+        int ans = 0, LM = 0, RM = 0;
         int n = arr.size();
-        stack<int> st;
-        for (int i = 0; i < n; i++) {
-            while (!st.empty() && arr[i] > arr[st.top()]) {
-                int bottom = st.top();
-                st.pop();
-                if (st.empty())
-                    break;
-                int l = st.top();
-                int r = i;
-                int w = r - l - 1;
-                int h = min(arr[l], arr[r]) - arr[bottom];
-                ans += w * h;
+        int l = 0, r = n - 1;
+        if (n == 0)
+            return 0;
+        while (l < r) {
+            if (arr[l] <= arr[r]) {
+                if (LM > arr[l])
+                    ans += LM - arr[l];
+                else
+                    LM = arr[l];
+                l++;
+            } else {
+                if (RM > arr[r])
+                    ans += RM - arr[r];
+                else
+                    RM = arr[r];
+                r--;
             }
-            st.push(i);
         }
         return ans;
     }

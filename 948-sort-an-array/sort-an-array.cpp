@@ -1,4 +1,4 @@
-void merge(vector<int> &arr, int low, int mid, int high) {
+void merge(vector<int>& arr, int low, int mid, int high) {
     vector<int> temp;
     int left = low;
     int right = mid + 1;
@@ -6,8 +6,7 @@ void merge(vector<int> &arr, int low, int mid, int high) {
         if (arr[left] <= arr[right]) {
             temp.push_back(arr[left]);
             left++;
-        }
-        else {
+        } else {
             temp.push_back(arr[right]);
             right++;
         }
@@ -23,9 +22,10 @@ void merge(vector<int> &arr, int low, int mid, int high) {
     for (int i = low; i <= high; i++)
         arr[i] = temp[i - low];
 }
-void mergeSort(vector<int> &arr, int low, int high) {
-    if (low >= high) return;
-    int mid = (low + high) / 2 ;
+void mergeSort(vector<int>& arr, int low, int high) {
+    if (low >= high)
+        return;
+    int mid = (low + high) / 2;
     mergeSort(arr, low, mid);
     mergeSort(arr, mid + 1, high);
     merge(arr, low, mid, high);
@@ -33,7 +33,7 @@ void mergeSort(vector<int> &arr, int low, int high) {
 class Solution {
 public:
     vector<int> sortArray(vector<int>& nums) {
-        int n=nums.size();
+        int n = nums.size();
         mergeSort(nums, 0, n - 1);
         return nums;
     }

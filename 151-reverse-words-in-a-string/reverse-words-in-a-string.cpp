@@ -1,25 +1,25 @@
-#include <bits/stdc++.h>
 class Solution {
 public:
-    vector<string> split(const string& s, char delimiter) {
-        vector<string> tokens;
-        string token;
-        istringstream tokenStream(s);
-        while (getline(tokenStream, token, delimiter)) {
-            if (!token.empty())
-                tokens.push_back(token);
-        }
-        return tokens;
-    }
     string reverseWords(string s) {
-        string ans;
-        vector<string> data = split(s, ' ');
-        reverse(data.begin(), data.end());
-        for (int i = 0; i < data.size(); i++) {
-            ans += data[i];
-            if (i != data.size() - 1)
-                ans += ' ';
+        vector<string> words;
+        string word = "";
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] != ' ')
+                word += s[i];
+            else if (!word.empty()) {
+                words.push_back(word);
+                word = "";
+            }
         }
-        return ans;
+        if (!word.empty())
+            words.push_back(word);
+        reverse(words.begin(), words.end());
+        string result = "";
+        for (int i = 0; i < words.size(); i++) {
+            result += words[i];
+            if (i < words.size() - 1)
+                result += " ";
+        }
+        return result;
     }
 };
